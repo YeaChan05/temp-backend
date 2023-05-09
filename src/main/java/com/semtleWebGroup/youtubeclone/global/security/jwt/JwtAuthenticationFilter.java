@@ -48,7 +48,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
         String userEmail = jwtTokenProvider.getUserEmail(token);
         log.info("Authenticated user Email : " + userEmail);
-        
+        //TODO: Member기준 authentication이 아닌 Channel기준으로
         Authentication authentication = jwtTokenProvider.getAuthentication(token);
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
