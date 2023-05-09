@@ -1,6 +1,5 @@
 package com.semtleWebGroup.youtubeclone.global.config;
 
-import com.semtleWebGroup.youtubeclone.domain.member.service.MemberDetailsService;
 import com.semtleWebGroup.youtubeclone.global.error.exception.handler.MemberAccessDeniedHandler;
 import com.semtleWebGroup.youtubeclone.global.error.exception.handler.MemberAuthenticationEntryPoint;
 import com.semtleWebGroup.youtubeclone.global.security.jwt.JwtAuthenticationFilter;
@@ -15,7 +14,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.filter.CorsFilter;
 
 /**
  * package :  com.semtleWebGroup.youtubeclone.global.security.config
@@ -29,8 +27,6 @@ import org.springframework.web.filter.CorsFilter;
 @Slf4j
 public class WebSecurityConfig {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
-    
-    private final MemberDetailsService memberDetailsService;
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
@@ -69,7 +65,6 @@ public class WebSecurityConfig {
                 .and()
                 .exceptionHandling()
                 .authenticationEntryPoint(new MemberAuthenticationEntryPoint());
-        http.addFilterAfter(jwtAuthenticationFilter, CorsFilter.class);
         return http.build();
     }
     
